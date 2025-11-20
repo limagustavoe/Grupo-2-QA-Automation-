@@ -1,0 +1,1 @@
+// Aqui estarán los casos de prueba referido a "Comprar entradas" de la web de Ticketazo
