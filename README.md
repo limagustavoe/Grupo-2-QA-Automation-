@@ -12,6 +12,8 @@ limagustavoemilio@gmail.com
 
 luis.andres.perez.cordon@gmail.com
 
+mlucianadiaz@gmail.com
+
 
 
 Trello
