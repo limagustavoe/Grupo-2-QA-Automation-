@@ -66,7 +66,7 @@ it('Login',()=>{
     const telefonoAleatorio = generarTelefonoRandom();
     const contrasenaAleatoria = generarContrasena();
 
-    cy.registroComprador(
+    cy.registroComprador( 
     dniAleatorio,
     emailAleatorio,
     telefonoAleatorio,

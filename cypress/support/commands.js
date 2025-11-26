@@ -109,20 +109,19 @@ Cypress.Commands.add('login', (email, password) => {
     });
   });
 
-  
-  
-
     //CREAR EVENTOS
 Cypress.Commands.add('crear_evento', (titulo, fechaano, horario, horariominuto, nombreLugar, calle, altura, codigo, info) => {
     cy.visit('https://ticketazo.com.ar/newEvent')
     cy.get('[data-cy="input-titulo"]').click().clear().type(titulo)
-    cy.get('[data-cy="datepicker-fecha"]').click().type(fechaano)
+    cy.get('div[aria-label="día, "]').type(fechaano)
     cy.get('[data-cy="select-edad"]').click()
     cy.get('[data-cy="option-edad-ATP"]').click()
     cy.get('[data-cy="select-genero"]').click()
     cy.get('[data-cy="option-genero-StandUp"]').click()
-    cy.get('[data-has-start-content="true"] > .relative').click().type(horario).type(horariominuto)
-    cy.get('.grid > :nth-child(7) > .relative').click().type(horario).type(horariominuto)
+    cy.get('div[aria-label="hora, "]').first().type(horario)
+    cy.get('div[aria-label="minuto, "]').first().type(horariominuto)
+    cy.get('div[aria-label="hora, "]').last().type(horario)
+    cy.get('div[aria-label="minuto, "]').last().type(horariominuto)
     cy.get('[data-cy="select-lugar-evento"]').click()
     cy.get('[data-cy="option-lugar-7"]').click()
     cy.get('[data-cy="input-nombre-lugar"]').click().type(nombreLugar)
