@@ -64,6 +64,52 @@ Cypress.Commands.add('login', (email, password) => {
     cy.get('[data-cy="btn-save-profile"]').click()
     cy.contains('¡Perfil actualizado con éxito!').should('be.visible')
   })
+
+  //CONSULTA EVENTOS
+  //busqueda por fechas
+  Cypress.Commands.add('rangoFechasBusqueda', (fechaInicio, fechaFin) => {
+    const [diaIn, mesIn, añoIn] = fechaInicio.split('/');
+    const [diaFin, mesFin, añoFin] = fechaFin.split('/');
+
+    cy.get('div[aria-label="día, Fecha de inicio, "]').clear().type(diaIn)
+    cy.get('div[aria-label="mes, Fecha de inicio, "]').clear().type(mesIn)
+    cy.get('div[aria-label="año, Fecha de inicio, "]').clear().type(añoIn)
+    cy.get('div[aria-label="día, Fecha final, "]').clear().type(diaFin)
+    cy.get('div[aria-label="mes, Fecha final, "]').clear().type(mesFin)
+    cy.get('div[aria-label="año, Fecha final, "]').clear().type(añoFin)
+  })
+
+  //seleccion de filtros de busqueda
+  Cypress.Commands.add('seleccionFiltrosDesplegables', (desplegable, opcion) => {
+    cy.get('button[aria-label='+desplegable+']')
+      .scrollIntoView()
+      .should('be.visible')
+      .click();
+    
+    cy.get('li[data-key='+opcion+']')
+      .scrollIntoView()
+      .should('be.visible')
+      .click({force: true});
+  })
+
+  //obtiene cantidad de eventos que resultaron de la busqueda
+  Cypress.Commands.add('obtenerCantidadCardsFiltradas', () => {
+    return cy.get('body').then(($body) => {
+      const $cards = $body.find('[data-cy^="evento-card"]');
+      const cantidad = $cards.length;
+  
+      if (cantidad > 0) {
+        cy.log(`Se encontraron ${cantidad} resultados`);
+      } else {
+        cy.log('No se encontraron resultados según filtros aplicados');
+      }
+  
+      // Devuelve cantidad para que pueda usarse en un .then()
+      return cantidad;
+    });
+  });
+
+  
   
 
     //CREAR EVENTOS
