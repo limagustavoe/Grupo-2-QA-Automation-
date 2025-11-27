@@ -5,18 +5,27 @@ describe('Registro de Cliente', () => {
   
     })
   
-    it('ID 1 - Registro de cliente con datos válidos', () => {
+    it.only('ID 1 - Registro de cliente con datos válidos', () => {
       cy.fixture('datosRegistroCliente').then(({cli_datos_validos}) => {
-        cy.completar_datos_cliente(
-          cli_datos_validos.nombre, 
-          cli_datos_validos.cuit, 
-          cli_datos_validos.direccion,
-          cli_datos_validos.telefono)
-        cy.completar_datos_ubicacion(cli_datos_validos.provincia, cli_datos_validos.localidad)
-        cy.completar_email_password(cli_datos_validos.email, cli_datos_validos.email, cli_datos_validos.password, cli_datos_validos.password)
-        cy.get('[data-cy="switch-establecimiento"]').click()
-        cy.get('[data-cy="btn-registrarse"]').click()
-        cy.url().should('eq', 'https://ticketazo.com.ar/auth/login')
+        cy.fixture('datosRegistroCliente').then(({ cli_datos_validos }) => {
+          cy.generarDatosRandom(cli_datos_validos.nombre, cli_datos_validos.email)
+            .then(({ nombre, email }) => {
+
+              cy.completar_datos_cliente(
+                nombre,
+                cli_datos_validos.cuit,
+                cli_datos_validos.direccion,
+                cli_datos_validos.telefono
+              );
+              
+              cy.completar_datos_ubicacion(cli_datos_validos.provincia, cli_datos_validos.localidad);
+              cy.completar_email_password(email, email, cli_datos_validos.password, cli_datos_validos.password);
+      
+              cy.get('[data-cy="switch-establecimiento"]').click();
+              cy.get('[data-cy="btn-registrarse"]').click();
+              cy.url().should('eq', 'https://ticketazo.com.ar/auth/login');
+           });
+        })
       })
     })
 

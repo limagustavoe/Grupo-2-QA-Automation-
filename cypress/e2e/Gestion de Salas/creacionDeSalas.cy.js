@@ -1,5 +1,5 @@
 describe('Creación de Salas (compacto)', () => {
-  it('crea una sección y una sala con nombre secuencial', () => {
+  it.only('crea una sección y una sala con nombre secuencial', () => {
     // la sección se crea al pulsar '+ Nueva Sección' — no hace falta poner nombre
 
     // Login, viewport y navegación

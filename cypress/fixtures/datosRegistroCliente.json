@@ -1,12 +1,12 @@
 {
     "cli_datos_validos":{
-        "nombre": "Test Cliente 03",
+        "nombre": "Test Cliente",
         "cuit": "30152478509",
         "direccion": "Av. Siempreviva 300",
         "telefono": "3511002474",
         "provincia": "Córdoba",
         "localidad": "Achiras",
-        "email": "testcliente0103@gmail.com",
+        "email": "testcliente@gmail.com",
         "password": "ContraCli351#"
     },
 

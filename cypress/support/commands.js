@@ -17,6 +17,16 @@ Cypress.Commands.add('cambioDeNombre', () => {
 
 //REGISTRO DE USUARIO CLIENTE
 
+//Command para generar nombre y mail random
+Cypress.Commands.add('generarDatosRandom', (baseNombre, baseEmail) => {
+  const random = Math.floor(Math.random() * 100000);
+
+  const nombreRandom = `${baseNombre}${random}`;
+  const emailRandom = `${random}${baseEmail}`;
+
+  return cy.wrap({ nombre: nombreRandom, email: emailRandom });
+});
+
 //Command para completar datos de usuario cliente
 Cypress.Commands.add('completar_datos_cliente', (razon_social, cuit, direccion, telefono) => {
     cy.get('[data-cy="input-razon-social"]').clear().type(razon_social)
